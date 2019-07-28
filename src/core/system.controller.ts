@@ -2,11 +2,45 @@ import { Controller, Get, Post, Body, Response, Delete, Param, Put } from '@nest
 import { RoleEntity } from './entities/role.entity';
 import { RoleService } from './services/role.service';
 import { RoleVM } from 'src/navigation/models/role.model';
+import { SystemVM } from './interfaces/system.interface';
+import { ViewSystemDto } from './dto/view-system.model';
+import { SystemService } from './services/system.service';
+import { identifier } from '@babel/types';
 
 @Controller('v1/system')
 export class SystemController {
 
-  constructor(private readonly roleService: RoleService) {}
+  constructor(
+    private readonly roleService: RoleService,
+    private readonly systemService: SystemService,
+  ) { }
+
+  @Get()
+  async getSystems(): Promise<ViewSystemDto[]> {
+    try {
+      return this.systemService.find();
+    } catch (error) {
+      return error;
+    }
+  }
+
+  @Post()
+  async createSystem(@Body() model: SystemVM): Promise<ViewSystemDto> {
+    try {
+      return await this.systemService.create(model);
+    } catch (error) {
+      return error;
+    }
+  }
+
+  @Put('/:id')
+  async updateSystem(@Param('id') id, @Body() model: SystemVM): Promise<ViewSystemDto> {
+    try {
+      return await this.systemService.update(id, model);
+    } catch (error) {
+      return error;
+    }
+  }
 
   @Get('/roles')
   async getRoles(): Promise<RoleEntity[]> {
@@ -50,4 +84,5 @@ export class SystemController {
       return error;
     }
   }
+
 }

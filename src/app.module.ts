@@ -24,6 +24,6 @@ import { CoreModule } from './core/core.module';
     CoreModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService ],
 })
 export class AppModule {}

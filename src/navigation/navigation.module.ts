@@ -6,6 +6,7 @@ import { MenuService } from './services/menu.service';
 import { CoreModule } from 'src/core/core.module';
 import { MenuEntity } from './entities/menu.entity';
 import { MenuNavigationItemEntity } from './entities/menu-navigation.entity';
+import { MenuController } from './controllers/menu.controller';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { MenuNavigationItemEntity } from './entities/menu-navigation.entity';
       MenuNavigationItemEntity,
     ]),
   ],
-  controllers: [NavigationController],
+  controllers: [NavigationController, MenuController],
   providers: [
     NavigationService,
     MenuService,
